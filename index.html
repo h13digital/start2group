@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start2 Growth Engine v2.0 — From Invisible Pipeline to Predictable Revenue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg-primary: #050911;
+    --bg-card: #0d1423;
+    --bg-card2: #111d30;
+    --accent-blue: #3B82F6;
+    --accent-cyan: #06B6D4;
+    --accent-teal: #14B8A6;
+    --accent-green: #22C55E;
+    --accent-emerald: #10B981;
+    --text-primary: #F0F4FF;
+    --text-muted: #8B9EC8;
+    --border: #1a2540;
+    --border-bright: #2a3a60;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+  }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, .syne { font-family: 'Syne', sans-serif; }
+
+  /* ───── NAV ───── */
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: 56px;
+    background: rgba(5,9,17,0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto; width: 100%;
+    padding: 0 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; white-space: nowrap;
+    text-decoration: none;
+  }
+  .nav-tabs {
+    display: flex; align-items: center; gap: 2px;
+    list-style: none; flex: 1; justify-content: center;
+  }
+  .nav-tabs a {
+    display: block; padding: 5px 10px; border-radius: 6px;
+    font-size: 12px; font-weight: 500; color: var(--text-muted);
+    text-decoration: none; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-tabs a:hover { color: var(--text-primary); background: rgba(59,130,246,0.1); }
+  .nav-tabs a.active { color: var(--accent-cyan); background: rgba(6,182,212,0.12); }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: #fff; text-decoration: none; white-space: nowrap;
+    box-shadow: 0 0 20px rgba(59,130,246,0.35);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { box-shadow: 0 0 35px rgba(59,130,246,0.55); transform: translateY(-1px); }
+
+  /* mobile hamburger */
+  #hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+  #hamburger span { display: block; width: 22px; height: 2px; background: var(--text-muted); border-radius: 2px; transition: all 0.3s; }
+  #mobile-menu {
+    display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 999;
+    background: rgba(5,9,17,0.97); border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem; flex-direction: column; gap: 4px;
+  }
+  #mobile-menu a { display: block; padding: 10px 12px; border-radius: 8px; color: var(--text-muted); font-size: 14px; text-decoration: none; }
+  #mobile-menu a:hover, #mobile-menu a.active { color: var(--accent-cyan); background: rgba(6,182,212,0.1); }
+  #mobile-menu.open { display: flex; }
+
+  /* ───── SECTIONS ───── */
+  section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 0 60px;
+    position: relative; overflow: hidden;
+  }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+
+  /* ───── HERO SLIDE 1 ───── */
+  #slide1 { padding: 0; }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: var(--bg-primary);
+    overflow: hidden;
+  }
+  .hero-mesh {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 40%, rgba(59,130,246,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(6,182,212,0.13) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 80%, rgba(20,184,166,0.10) 0%, transparent 60%);
+    animation: meshShift 12s ease-in-out infinite alternate;
+  }
+  @keyframes meshShift {
+    0% { transform: scale(1) translate(0,0); }
+    100% { transform: scale(1.08) translate(1%,1%); }
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6), transparent 75%);
+  }
+  .hero-content { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 2rem 60px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px; border-radius: 999px; margin-bottom: 2rem;
+    border: 1px solid rgba(6,182,212,0.35);
+    background: rgba(6,182,212,0.08);
+    font-size: 13px; font-weight: 500; color: var(--accent-cyan);
+  }
+  .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cyan); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+  .hero-h1 {
+    font-family: 'Syne', sans-serif; font-size: clamp(36px, 6vw, 72px); font-weight: 800;
+    line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; max-width: 900px;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 50%, #7dd3fc 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-subtitle { font-size: clamp(16px, 2vw, 20px); color: var(--text-muted); max-width: 600px; margin: 0 auto 2.5rem; }
+  .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4rem; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: #fff; text-decoration: none; border: none; cursor: pointer;
+    box-shadow: 0 0 30px rgba(59,130,246,0.4);
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { box-shadow: 0 0 50px rgba(59,130,246,0.65); transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600;
+    background: rgba(255,255,255,0.06); color: var(--text-primary);
+    text-decoration: none; border: 1px solid var(--border-bright); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.10); border-color: var(--accent-blue); }
+  .hero-stats {
+    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+  }
+  .stat-badge {
+    padding: 16px 24px; border-radius: 16px;
+    background: rgba(13,20,35,0.8); border: 1px solid var(--border-bright);
+    backdrop-filter: blur(10px); text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .stat-badge:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 30px rgba(59,130,246,0.15); }
+  .stat-number { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; line-height: 1; }
+  .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+  .stat-n1 .stat-number { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-n2 .stat-number { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-n3 .stat-number { background: linear-gradient(135deg, var(--accent-teal), var(--accent-green)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+  /* ───── CARDS ───── */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { border-color: var(--border-bright); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+    background: rgba(59,130,246,0.15); color: var(--accent-blue);
+    border: 1px solid rgba(59,130,246,0.25);
+  }
+  .badge-cyan { background: rgba(6,182,212,0.12); color: var(--accent-cyan); border-color: rgba(6,182,212,0.25); }
+  .badge-green { background: rgba(34,197,94,0.12); color: var(--accent-green); border-color: rgba(34,197,94,0.25); }
+  .badge-orange { background: rgba(249,115,22,0.12); color: #fb923c; border-color: rgba(249,115,22,0.25); }
+  .badge-red { background: rgba(239,68,68,0.12); color: #f87171; border-color: rgba(239,68,68,0.25); }
+  .badge-yellow { background: rgba(234,179,8,0.12); color: #facc15; border-color: rgba(234,179,8,0.25); }
+  .section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-cyan); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+  .section-sub { font-size: 17px; color: var(--text-muted); max-width: 640px; }
+
+  /* ───── FADE IN ANIMATION ───── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+
+  /* ───── SLIDE 2 ───── */
+  #slide2 { background: var(--bg-primary); }
+  .pain-card {
+    background: var(--bg-card); border-radius: 16px; padding: 1.75rem;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .pain-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .pain-border-red { border-left: 4px solid #ef4444; }
+  .pain-border-orange { border-left: 4px solid #f97316; }
+  .pain-border-yellow { border-left: 4px solid #eab308; }
+
+  /* ───── SLIDE 3 ───── */
+  #slide3 { background: linear-gradient(180deg, var(--bg-primary) 0%, #081022 100%); }
+  .ecosystem-node {
+    background: var(--bg-card); border: 1px solid var(--border-bright);
+    border-radius: 12px; padding: 1rem 1.5rem; text-align: center;
+    position: relative;
+  }
+  .ecosystem-hub {
+    background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(6,182,212,0.15));
+    border-color: rgba(6,182,212,0.4);
+    border-radius: 16px; padding: 1.5rem 2rem;
+  }
+
+  /* ───── SLIDE 4 ───── */
+  #slide4 { background: var(--bg-primary); }
+  .before-after-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  .before-after-table th {
+    padding: 12px 16px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .before-after-table td {
+    padding: 14px 16px; font-size: 14px; border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .before-after-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .before-col { color: var(--text-muted); }
+  .after-col { color: var(--text-primary); }
+  .after-col strong { color: var(--accent-green); }
+
+  /* ───── SLIDE 5 — ACCORDION FRAMEWORK ───── */
+  #slide5 { background: linear-gradient(180deg, #081022 0%, var(--bg-primary) 100%); }
+  .layer-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 10px;
+    transition: border-color 0.3s;
+  }
+  .layer-item.active { border-color: var(--border-bright); }
+  .layer-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.1rem 1.4rem; cursor: pointer;
+    user-select: none;
+  }
+  .layer-header:hover { background: rgba(255,255,255,0.03); }
+  .layer-num {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .layer-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; flex: 1; }
+  .layer-outcome-inline { font-size: 12px; color: var(--text-muted); display: none; }
+  .layer-chevron { color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; }
+  .layer-item.active .layer-chevron { transform: rotate(180deg); }
+  .layer-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s; }
+  .layer-item.active .layer-body { max-height: 300px; }
+  .layer-body-inner { padding: 0 1.4rem 1.4rem; padding-top: 0; }
+  .layer-desc { font-size: 15px; color: var(--text-muted); font-style: italic; margin-bottom: 0.75rem; }
+  .layer-outcome-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  /* layer colors */
+  .l1 .layer-num { background: rgba(59,130,246,0.2); color: var(--accent-blue); }
+  .l1.active { border-color: rgba(59,130,246,0.4); }
+  .l2 .layer-num { background: rgba(6,182,212,0.15); color: var(--accent-cyan); }
+  .l2.active { border-color: rgba(6,182,212,0.4); }
+  .l3 .layer-num { background: rgba(20,184,166,0.15); color: var(--accent-teal); }
+  .l3.active { border-color: rgba(20,184,166,0.4); }
+  .l4 .layer-num { background: rgba(34,197,94,0.15); color: var(--accent-green); }
+  .l4.active { border-color: rgba(34,197,94,0.4); }
+  .l5 .layer-num { background: rgba(16,185,129,0.15); color: var(--accent-emerald); }
+  .l5.active { border-color: rgba(16,185,129,0.4); }
+
+  /* ───── SLIDE 6 ───── */
+  #slide6 { background: var(--bg-primary); }
+  .roi-vector { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+  .roi-number { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; }
+  .roi-bottom { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 12px; padding: 1.25rem 1.75rem; }
+
+  /* ───── SLIDE 7 — ROADMAP ───── */
+  #slide7 { background: linear-gradient(180deg, var(--bg-primary) 0%, #081022 100%); }
+  .timeline { display: flex; gap: 0; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; top: 22px; left: calc(50% - 1px);
+    width: 2px; height: calc(100% - 44px);
+    background: linear-gradient(180deg, var(--accent-blue), var(--accent-cyan), var(--accent-green));
+    display: none;
+  }
+  .phase {
+    flex: 1; padding: 0 1rem;
+    border-left: 1px solid var(--border);
+  }
+  .phase:first-child { border-left: none; }
+  .phase-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px;
+    margin-bottom: 1rem; flex-shrink: 0;
+  }
+  .phase1 .phase-dot { background: rgba(59,130,246,0.2); border: 2px solid var(--accent-blue); color: var(--accent-blue); }
+  .phase2 .phase-dot { background: rgba(6,182,212,0.2); border: 2px solid var(--accent-cyan); color: var(--accent-cyan); }
+  .phase3 .phase-dot { background: rgba(34,197,94,0.2); border: 2px solid var(--accent-green); color: var(--accent-green); }
+  .phase-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 4px; }
+  .phase-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 0.5rem; }
+  .phase-tagline { font-size: 13px; color: var(--text-muted); font-style: italic; margin-bottom: 1rem; }
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .checklist li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--text-muted); }
+  .checklist li svg { flex-shrink: 0; margin-top: 2px; }
+  .phase-success { margin-top: 1rem; padding: 10px 14px; border-radius: 10px; font-size: 12px; font-weight: 500; }
+  .phase1 .phase-success { background: rgba(59,130,246,0.1); color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.2); }
+  .phase2 .phase-success { background: rgba(6,182,212,0.1); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.2); }
+  .phase3 .phase-success { background: rgba(34,197,94,0.1); color: var(--accent-green); border: 1px solid rgba(34,197,94,0.2); }
+
+  /* ───── SLIDE 8 — CASE STUDIES ───── */
+  #slide8 { background: var(--bg-primary); }
+  .ticker-wrap { overflow: hidden; width: 100%; padding: 1rem 0; }
+  .ticker { display: flex; gap: 2rem; animation: ticker 20s linear infinite; width: max-content; }
+  .ticker-item {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 20px; font-size: 13px; font-weight: 600; color: var(--text-muted);
+    white-space: nowrap; display: flex; align-items: center; gap: 8px;
+  }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .metric-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-radius: 14px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .metric-before { background: rgba(17,24,39,0.8); padding: 1.5rem; }
+  .metric-after { background: rgba(16,185,129,0.07); padding: 1.5rem; border-left: 1px solid rgba(34,197,94,0.2); }
+  .metric-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 1rem; }
+  .metric-before .metric-label { color: var(--text-muted); }
+  .metric-after .metric-label { color: var(--accent-green); }
+  .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-val-before { color: #ef4444; font-weight: 600; }
+  .metric-val-after { color: var(--accent-green); font-weight: 700; }
+
+  /* ───── SLIDE 9 — ANALYTICS DASHBOARD ───── */
+  #slide9 { background: linear-gradient(180deg, #081022 0%, var(--bg-primary) 100%); }
+  .browser-mock {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; position: relative;
+  }
+  .browser-bar {
+    background: #0d1528; padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .browser-dots { display: flex; gap: 6px; }
+  .browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .bd-red { background: #ff5f56; }
+  .bd-yellow { background: #ffbd2e; }
+  .bd-green { background: #27c93f; }
+  .browser-url {
+    flex: 1; background: rgba(255,255,255,0.06); border-radius: 6px;
+    padding: 4px 12px; font-size: 12px; color: var(--text-muted);
+    max-width: 400px;
+  }
+  .browser-body { padding: 1.25rem; position: relative; }
+  .watermark {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800;
+    color: rgba(255,255,255,0.04); pointer-events: none; z-index: 10;
+    letter-spacing: 0.1em; transform: rotate(-20deg);
+  }
+  .kpi-table { width: 100%; font-size: 12px; margin-top: 1rem; border-collapse: collapse; }
+  .kpi-table th { padding: 8px 12px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); background: rgba(255,255,255,0.03); }
+  .kpi-table td { padding: 8px 12px; border-top: 1px solid var(--border); font-size: 13px; }
+  .kpi-table tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+
+  /* ───── SLIDE 10 — WHY HIEP ───── */
+  #slide10 { background: var(--bg-primary); }
+  .trust-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+
+  /* ───── SLIDE 11 — INVESTMENT ───── */
+  #slide11 {
+    background: linear-gradient(135deg, #081022 0%, var(--bg-primary) 50%, #040810 100%);
+  }
+  .invest-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 2rem; transition: all 0.3s;
+  }
+  .invest-card.featured {
+    background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(6,182,212,0.08));
+    border-color: rgba(6,182,212,0.35);
+    box-shadow: 0 0 40px rgba(6,182,212,0.1);
+  }
+  .invest-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  .tool-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+  .tool-table th { padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); background: rgba(255,255,255,0.03); }
+  .tool-table td { padding: 10px 12px; border-top: 1px solid var(--border); }
+  .tool-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+  /* ───── SLIDE 12 — CLOSING ───── */
+  #slide12 {
+    background: var(--bg-primary);
+    background-image: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(59,130,246,0.1) 0%, transparent 70%);
+  }
+  .contact-form input, .contact-form textarea {
+    width: 100%; background: var(--bg-card2); border: 1px solid var(--border);
+    color: var(--text-primary); padding: 12px 16px; border-radius: 10px;
+    font-size: 15px; font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s; resize: vertical;
+    outline: none;
+  }
+  .contact-form input:focus, .contact-form textarea:focus {
+    border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text-muted); }
+
+  /* ───── FOOTER ───── */
+  footer { background: var(--bg-primary); border-top: 1px solid var(--border); padding: 2.5rem 0; }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 767px) {
+    .nav-tabs { display: none; }
+    #hamburger { display: flex; }
+    .timeline { flex-direction: column; gap: 2rem; }
+    .phase { border-left: none; border-top: 1px solid var(--border); padding: 1.5rem 0 0; }
+    .phase:first-child { border-top: none; padding-top: 0; }
+    .metric-compare { grid-template-columns: 1fr; }
+    .metric-after { border-left: none; border-top: 1px solid rgba(34,197,94,0.2); }
+    .hero-stats { gap: 1rem; }
+    .stat-badge { padding: 12px 16px; }
+    .stat-number { font-size: 24px; }
+    html { scroll-snap-type: none; }
+  }
+  @media (max-width: 480px) {
+    .hero-h1 { font-size: 30px; }
+    .hero-subtitle { font-size: 15px; }
+    .btn-primary, .btn-secondary { padding: 12px 20px; font-size: 14px; }
+  }
+
+  /* divider */
+  .divider { height: 1px; background: var(--border); margin: 2rem 0; }
+  .quote-block {
+    border-left: 3px solid var(--accent-cyan); padding: 1rem 1.5rem;
+    background: rgba(6,182,212,0.05); border-radius: 0 10px 10px 0;
+    font-size: 16px; font-style: italic; color: var(--text-primary);
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#slide1" class="nav-logo">Start2 GE v2.0</a>
+    <ul class="nav-tabs" id="navTabs">
+      <li><a href="#slide1" data-slide="1" class="active">Hook</a></li>
+      <li><a href="#slide2" data-slide="2">Status Quo</a></li>
+      <li><a href="#slide3" data-slide="3">Ecosystem</a></li>
+      <li><a href="#slide4" data-slide="4">Vision</a></li>
+      <li><a href="#slide5" data-slide="5">Framework</a></li>
+      <li><a href="#slide6" data-slide="6">ROI</a></li>
+      <li><a href="#slide7" data-slide="7">Roadmap</a></li>
+      <li><a href="#slide8" data-slide="8">Traction</a></li>
+      <li><a href="#slide9" data-slide="9">Dashboard</a></li>
+      <li><a href="#slide10" data-slide="10">Why Hiep</a></li>
+      <li><a href="#slide11" data-slide="11">Investment</a></li>
+      <li><a href="#slide12" data-slide="12">Ask</a></li>
+    </ul>
+    <a href="#slide12" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.64A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Contact Hiep
+    </a>
+    <div id="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div id="mobile-menu">
+  <a href="#slide1" onclick="closeMobileMenu()">01 — Opening Hook</a>
+  <a href="#slide2" onclick="closeMobileMenu()">02 — Status Quo</a>
+  <a href="#slide3" onclick="closeMobileMenu()">03 — Ecosystem</a>
+  <a href="#slide4" onclick="closeMobileMenu()">04 — Vision</a>
+  <a href="#slide5" onclick="closeMobileMenu()">05 — Framework</a>
+  <a href="#slide6" onclick="closeMobileMenu()">06 — ROI Case</a>
+  <a href="#slide7" onclick="closeMobileMenu()">07 — 90-Day Roadmap</a>
+  <a href="#slide8" onclick="closeMobileMenu()">08 — Traction</a>
+  <a href="#slide9" onclick="closeMobileMenu()">09 — Dashboard</a>
+  <a href="#slide10" onclick="closeMobileMenu()">10 — Why Hiep</a>
+  <a href="#slide11" onclick="closeMobileMenu()">11 — Investment</a>
+  <a href="#slide12" onclick="closeMobileMenu()">12 — The Ask</a>
+</div>
+
+<!-- ═══════ SLIDE 1 — OPENING HOOK ═══════ -->
+<section id="slide1">
+  <div class="hero-bg"><div class="hero-mesh"></div><div class="hero-grid"></div></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-in">
+      <span class="hero-badge-dot"></span>
+      Start2 Group · Growth Engine v2.0 · Feb 2026
+    </div>
+    <h1 class="hero-h1 fade-in fade-in-delay-1">
+      From <span class="gradient-text">Invisible Pipeline</span><br>to Predictable Revenue
+    </h1>
+    <p class="hero-subtitle fade-in fade-in-delay-2">
+      A Director-level proposal by <strong style="color:var(--text-primary)">Hiep Nguyen</strong> — Marketing Operations & Analytics Manager
+    </p>
+    <div class="hero-buttons fade-in fade-in-delay-3">
+      <a href="#slide2" class="btn-primary">
+        Explore the Case
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+      <a href="#" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download PDF
+      </a>
+    </div>
+    <div class="hero-stats fade-in fade-in-delay-4">
+      <div class="stat-badge stat-n1">
+        <div class="stat-number"><span class="count-up" data-target="5" data-suffix="x">0x</span></div>
+        <div class="stat-label">Conservative Year 1 ROI</div>
+      </div>
+      <div class="stat-badge stat-n2">
+        <div class="stat-number"><span class="count-up" data-target="90" data-suffix=" days">0 days</span></div>
+        <div class="stat-label">To Full Deployment</div>
+      </div>
+      <div class="stat-badge stat-n3">
+        <div class="stat-number"><span class="count-up" data-target="150" data-prefix="€" data-suffix="K+">€0K+</span></div>
+        <div class="stat-label">Upside in Year 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 2 — COST OF STATUS QUO ═══════ -->
+<section id="slide2">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="responsive-split">
+      <div>
+        <p class="section-label fade-in">The Question That Matters</p>
+        <h2 class="section-title fade-in fade-in-delay-1">What Invisible Pipelines <span class="gradient-text">Cost You</span></h2>
+        <p class="section-sub fade-in fade-in-delay-2" style="margin-bottom:1.5rem;">
+          Start2 is recognized as a <strong style="color:var(--text-primary)">Top 3 EU Startup Hub</strong> by the Financial Times in 2025. But right now — can you tell me, in real time, which channel brought your last 10 enrolled startups?
+        </p>
+        <div class="quote-block fade-in fade-in-delay-3">
+          "This is a natural stage when an organization grows faster than its infrastructure. The question is: how long can you afford to leave money in the pipeline?"
+        </div>
+        <div style="margin-top:2rem;" class="fade-in fade-in-delay-4">
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);">
+              <svg width="18" height="18" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>30–40% event attendees lost after each event</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);">
+              <svg width="18" height="18" fill="none" stroke="#f97316" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>€45K corporate deals nurtured like €2.5K startup deals</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);">
+              <svg width="18" height="18" fill="none" stroke="#eab308" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Budget allocated by intuition, not attribution data</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div class="pain-card pain-border-red fade-in fade-in-delay-1">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div>
+              <div class="badge badge-red" style="margin-bottom:8px;">Lead Loss</div>
+              <h3 style="font-size:15px;font-weight:600;margin-bottom:6px;">Events Without Follow-Up</h3>
+              <p style="font-size:13px;color:var(--text-muted);">Rise&Scale / Cashwalk attendees not tracked systematically. <strong style="color:#f87171;">€50K–€200K pipeline value abandoned per event.</strong></p>
+            </div>
+          </div>
+        </div>
+        <div class="pain-card pain-border-orange fade-in fade-in-delay-2">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(249,115,22,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" fill="none" stroke="#f97316" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            </div>
+            <div>
+              <div class="badge badge-orange" style="margin-bottom:8px;">Wrong Velocity</div>
+              <h3 style="font-size:15px;font-weight:600;margin-bottom:6px;">One Pipeline, Three Personas</h3>
+              <p style="font-size:13px;color:var(--text-muted);">Corporate (€20K–€150K, 2–4 month cycle) nurtured identically to startups (€500–€5K, 2–6 weeks). <strong style="color:#fb923c;">Wrong speed, wrong message.</strong></p>
+            </div>
+          </div>
+        </div>
+        <div class="pain-card pain-border-yellow fade-in fade-in-delay-3">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(234,179,8,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" fill="none" stroke="#eab308" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div>
+              <div class="badge badge-yellow" style="margin-bottom:8px;">No Attribution</div>
+              <h3 style="font-size:15px;font-weight:600;margin-bottom:6px;">Budget Allocated by Gut Feel</h3>
+              <p style="font-size:13px;color:var(--text-muted);">No attribution model means no ROI proof. <strong style="color:#facc15;">Decisions made by feeling, not data.</strong> No way to double down on what works.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 3 — ECOSYSTEM ═══════ -->
+<section id="slide3">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p class="section-label fade-in">Why Start2 Is Different</p>
+      <h2 class="section-title fade-in fade-in-delay-1" style="max-width:720px;margin:0 auto 1rem;">The Ecosystem That Makes This <span class="gradient-text">Harder — and More Valuable</span></h2>
+      <p class="section-sub fade-in fade-in-delay-2" style="margin:0 auto;">Start2 operates at the intersection of three entirely different buyer personas with radically different buying cycles.</p>
+    </div>
+    <!-- Ecosystem diagram -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;margin-bottom:2.5rem;" class="fade-in fade-in-delay-2">
+      <div class="ecosystem-node" style="text-align:right;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:4px;">Buyer 1</div>
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px;">Government</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Germany / EU · Fund & mandate</div>
+        <div class="badge badge-yellow">6–18 month cycle</div>
+      </div>
+      <div class="ecosystem-hub" style="text-align:center;min-width:180px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-cyan);margin-bottom:6px;">The Bridge</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;">START2 GROUP</div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.7;">Rise&Scale · Cashwalk<br>Internationalization · Fundraising<br>Corporate Mandates · Public Sector</div>
+      </div>
+      <div class="ecosystem-node">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:4px;">Buyer 2</div>
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px;">Corporate</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">DAX / Fortune 500 · Seek innovation</div>
+        <div class="badge badge-orange">2–4 month cycle</div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-bottom:2.5rem;" class="fade-in fade-in-delay-3">
+      <div class="ecosystem-node" style="text-align:center;max-width:300px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:4px;">Buyer 3</div>
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px;">Startups</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Deeptech · ClimateTech · HealthTech</div>
+        <div class="badge">2–6 week cycle</div>
+      </div>
+    </div>
+    <div class="quote-block fade-in fade-in-delay-4" style="max-width:760px;margin:0 auto;">
+      "Most marketing frameworks are built for one buyer persona. Start2 has three — with completely different buying cycles. A single pipeline cannot serve all three. That is the fundamental architectural problem we need to solve."
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 4 — VISION ═══════ -->
+<section id="slide4">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p class="section-label fade-in">Growth Engine v2.0</p>
+      <h2 class="section-title fade-in fade-in-delay-1" style="max-width:700px;margin:0 auto 1rem;">From Manual Operations to <span class="gradient-text">Predictable Growth</span></h2>
+      <p class="section-sub fade-in fade-in-delay-2" style="margin:0 auto;">Not a new tool. A new operating model — where Start2 can grow faster without growing headcount proportionally.</p>
+    </div>
+    <div class="fade-in fade-in-delay-2">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:16px;overflow:hidden;border:1px solid var(--border);">
+        <!-- BEFORE header -->
+        <div style="padding:16px 24px;background:rgba(17,24,39,0.9);border-right:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#ef4444;"></div>
+            <span style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">Before — Today</span>
+          </div>
+        </div>
+        <!-- AFTER header -->
+        <div style="padding:16px 24px;background:rgba(16,185,129,0.07);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-green);"></div>
+            <span style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-green);">After — Day 90</span>
+          </div>
+        </div>
+        <!-- rows -->
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-muted);border-top:1px solid var(--border);border-right:1px solid var(--border);">Leads tracked in spreadsheets or lost entirely</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-primary);border-top:1px solid var(--border);">Every lead auto-captured, enriched, and scored in HubSpot</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-muted);border-top:1px solid var(--border);border-right:1px solid var(--border);">PM manually qualifies leads after every event</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-primary);border-top:1px solid var(--border);">System alerts PM only when a lead is ready — score ≥ threshold</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-muted);border-top:1px solid var(--border);border-right:1px solid var(--border);">Corporate &amp; startup deals in the same pipeline</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-primary);border-top:1px solid var(--border);">3 separate pipelines, each with correct velocity benchmarks</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-muted);border-top:1px solid var(--border);border-right:1px solid var(--border);">Reporting takes days to compile manually</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-primary);border-top:1px solid var(--border);">Real-time dashboards for CEO, BD team, and German government</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-muted);border-top:1px solid var(--border);border-right:1px solid var(--border);">AI personalization = copy-paste templates</div>
+        <div style="padding:16px 24px;font-size:14px;color:var(--text-primary);border-top:1px solid var(--border);">AI-generated opening paragraph, personalized to country &amp; industry</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 5 — 5-LAYER FRAMEWORK ═══════ -->
+<section id="slide5">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+      <div>
+        <p class="section-label fade-in">The Architecture</p>
+        <h2 class="section-title fade-in fade-in-delay-1">How It Works — <span class="gradient-text">The 5-Layer Framework</span></h2>
+        <p class="section-sub fade-in fade-in-delay-2" style="margin-bottom:2rem;">Each layer represents a distinct business outcome. You cannot have Layer 5 without Layer 1. This is why the 90-day roadmap is sequenced the way it is — foundation first, intelligence last.</p>
+        <div class="quote-block fade-in fade-in-delay-3">
+          "You cannot optimize what you cannot measure. The sequence matters as much as the system."
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-2">
+        <div class="layer-item l5" id="layer5">
+          <div class="layer-header" onclick="toggleLayer('layer5')">
+            <div class="layer-num">5</div>
+            <div>
+              <div class="layer-title" style="color:#10B981;">Revenue Intelligence</div>
+              <div class="layer-outcome-inline">CEOs get real-time reports</div>
+            </div>
+            <svg class="layer-chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="layer-body">
+            <div class="layer-body-inner">
+              <p class="layer-desc">"CEOs and government partners get real-time reports. No more manual PowerPoints."</p>
+              <span class="layer-outcome-badge" style="background:rgba(16,185,129,0.12);color:#10B981;border:1px solid rgba(16,185,129,0.25);">📊 4 dashboards live by Day 90</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer-item l4" id="layer4">
+          <div class="layer-header" onclick="toggleLayer('layer4')">
+            <div class="layer-num">4</div>
+            <div>
+              <div class="layer-title" style="color:#22C55E;">AI Automation</div>
+            </div>
+            <svg class="layer-chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="layer-body">
+            <div class="layer-body-inner">
+              <p class="layer-desc">"The system follows up, nurtures, and alerts — so your team acts only when it matters."</p>
+              <span class="layer-outcome-badge" style="background:rgba(34,197,94,0.12);color:#22C55E;border:1px solid rgba(34,197,94,0.25);">⚡ MQL response time &lt;2 hours</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer-item l3 active" id="layer3">
+          <div class="layer-header" onclick="toggleLayer('layer3')">
+            <div class="layer-num">3</div>
+            <div>
+              <div class="layer-title" style="color:#14B8A6;">Revenue Operations</div>
+            </div>
+            <svg class="layer-chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="layer-body">
+            <div class="layer-body-inner">
+              <p class="layer-desc">"Three pipelines, three personas, three deal velocities. Nothing falls through the cracks."</p>
+              <span class="layer-outcome-badge" style="background:rgba(20,184,166,0.12);color:#14B8A6;border:1px solid rgba(20,184,166,0.25);">🎯 3 separate pipelines with velocity benchmarks</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer-item l2" id="layer2">
+          <div class="layer-header" onclick="toggleLayer('layer2')">
+            <div class="layer-num">2</div>
+            <div>
+              <div class="layer-title" style="color:#06B6D4;">Martech Execution</div>
+            </div>
+            <svg class="layer-chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="layer-body">
+            <div class="layer-body-inner">
+              <p class="layer-desc">"Right message, right person, right channel — for startups, corporates, and government alike."</p>
+              <span class="layer-outcome-badge" style="background:rgba(6,182,212,0.12);color:#06B6D4;border:1px solid rgba(6,182,212,0.25);">✉️ ≥30% nurture open rate target</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer-item l1" id="layer1">
+          <div class="layer-header" onclick="toggleLayer('layer1')">
+            <div class="layer-num">1</div>
+            <div>
+              <div class="layer-title" style="color:#3B82F6;">Foundation &amp; Data</div>
+            </div>
+            <svg class="layer-chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="layer-body">
+            <div class="layer-body-inner">
+              <p class="layer-desc">"GDPR-compliant tracking, clean CRM, unified data model. You cannot optimize what you cannot measure."</p>
+              <span class="layer-outcome-badge" style="background:rgba(59,130,246,0.12);color:#3B82F6;border:1px solid rgba(59,130,246,0.25);">🔒 Zero leads lost from form submissions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 6 — ROI CASE ═══════ -->
+<section id="slide6">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p class="section-label fade-in">Conservative Projections</p>
+      <h2 class="section-title fade-in fade-in-delay-1" style="max-width:700px;margin:0 auto 1rem;">What This Is Worth — <span class="gradient-text">The ROI Case</span></h2>
+      <p class="section-sub fade-in fade-in-delay-2" style="margin:0 auto;">Three independent ROI vectors, each conservative, each measurable within 90 days.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem;">
+      <div class="roi-vector fade-in fade-in-delay-1">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-blue);margin-bottom:12px;">Vector 1</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;">Lead Recovery<br>from Events</h3>
+        <div class="roi-number" style="background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:12px 0;">€50K–€200K</div>
+        <p style="font-size:13px;color:var(--text-muted);">Per event properly captured. Conversion target: 15% → 40%. Applied to Rise&amp;Scale, Cashwalk, and Internationalization events.</p>
+      </div>
+      <div class="roi-vector fade-in fade-in-delay-2">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-cyan);margin-bottom:12px;">Vector 2</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;">Team Productivity<br>Recovery</h3>
+        <div class="roi-number" style="background:linear-gradient(135deg,var(--accent-cyan),var(--accent-teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:12px 0;">€93,600/yr</div>
+        <p style="font-size:13px;color:var(--text-muted);">3 people × 10h/week recovered. Current manual ops: 8–12h/week/person. With automation: &lt;2h/week. At €60/h = recovered capacity.</p>
+      </div>
+      <div class="roi-vector fade-in fade-in-delay-3">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-teal);margin-bottom:12px;">Vector 3</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;">Corporate Deal<br>Acceleration</h3>
+        <div class="roi-number" style="background:linear-gradient(135deg,var(--accent-teal),var(--accent-green));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:12px 0;">€45,000</div>
+        <p style="font-size:13px;color:var(--text-muted);">Per additional closed deal. Cut 2 weeks from average 2–4 month cycle = 1 more deal/year. At 10 corporate deals × €45K average.</p>
+      </div>
+    </div>
+    <div class="roi-bottom fade-in fade-in-delay-3">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:center;">
+        <div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:6px;">Annual Tool Cost</div>
+          <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#f87171;">~€24–30K</div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:6px;">Conservative Year 1 Upside</div>
+          <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent-green);">€150,000+</div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:6px;">ROI Before Govt Contracts</div>
+          <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">5–6×</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 7 — 90-DAY ROADMAP ═══════ -->
+<section id="slide7">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p class="section-label fade-in">Concrete. Deliverable by Deliverable.</p>
+      <h2 class="section-title fade-in fade-in-delay-1" style="max-width:700px;margin:0 auto 1rem;">The <span class="gradient-text">90-Day Roadmap</span> to Full Deployment</h2>
+      <p class="section-sub fade-in fade-in-delay-2" style="margin:0 auto;">Three sprints. Each with explicit success criteria. No ambiguity about what "done" looks like.</p>
+    </div>
+    <div class="timeline fade-in fade-in-delay-2">
+      <div class="phase phase1">
+        <div class="phase-dot">1</div>
+        <div class="phase-label">Day 1–30</div>
+        <div class="phase-title">Foundation</div>
+        <div class="phase-tagline">"Build the infrastructure. Capture every lead."</div>
+        <ul class="checklist">
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            HubSpot audit: contact dedup, property cleanup
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            3 deal pipelines with full stage definitions
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            GDPR compliance audit + consent forms
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            GA4 + GTM server-side + LinkedIn Conversion API
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Event → HubSpot CRM auto-sync integration
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Lead Scoring for Group A &amp; B configured
+          </li>
+        </ul>
+        <div class="phase-success">✅ Zero leads lost. Lead Scoring active. 3 pipelines live.</div>
+      </div>
+      <div class="phase phase2">
+        <div class="phase-dot">2</div>
+        <div class="phase-label">Day 31–60</div>
+        <div class="phase-title">Automation</div>
+        <div class="phase-tagline">"Let the system do the follow-up."</div>
+        <ul class="checklist">
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            MQL→SQL Handover (Slack alert + auto-task)
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Startup Nurture Sequence (6 emails, DACH content)
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Corporate ABM Sequence (5 industry touchpoints)
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Post-Meeting workflows: Win / Not Ready / Lost
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            AI Email Personalization MVP (country + industry)
+          </li>
+        </ul>
+        <div class="phase-success">✅ Nurture live ≥30% open rate. MQL response &lt;2 hours.</div>
+      </div>
+      <div class="phase phase3">
+        <div class="phase-dot">3</div>
+        <div class="phase-label">Day 61–90</div>
+        <div class="phase-title">Intelligence</div>
+        <div class="phase-tagline">"See everything. Decide faster."</div>
+        <ul class="checklist">
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#22C55E" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Looker Studio — Executive Growth Dashboard
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#22C55E" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Program Operations Dashboard (PMs)
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#22C55E" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Government Reporting Module (EU funders)
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#22C55E" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Multi-touch Attribution model validated
+          </li>
+          <li>
+            <svg width="16" height="16" fill="none" stroke="#22C55E" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            OKR baselines + 90-day review
+          </li>
+        </ul>
+        <div class="phase-success">✅ 4 dashboards live. CEO sees pipeline in real-time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 8 — TRACTION / CASE STUDIES ═══════ -->
+<section id="slide8">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <p class="section-label fade-in">Ecosystem Partners &amp; Comparable Results</p>
+      <h2 class="section-title fade-in fade-in-delay-1" style="max-width:700px;margin:0 auto 1rem;">The <span class="gradient-text">Traction Model</span> — What This Looks Like in Practice</h2>
+    </div>
+    <!-- Ticker -->
+    <div class="ticker-wrap fade-in fade-in-delay-1" style="margin-bottom:2.5rem;">
+      <div class="ticker" id="ticker">
+        <div class="ticker-item"><span style="color:var(--accent-blue);">⬡</span> Rise &amp; Scale</div>
+        <div class="ticker-item"><span style="color:var(--accent-cyan);">⬡</span> Cashwalk</div>
+        <div class="ticker-item"><span style="color:var(--accent-teal);">⬡</span> Internationalization</div>
+        <div class="ticker-item"><span style="color:var(--accent-green);">⬡</span> Fundraising Hub</div>
+        <div class="ticker-item"><span style="color:var(--accent-blue);">⬡</span> Corporate Mandates</div>
+        <div class="ticker-item"><span style="color:var(--accent-cyan);">⬡</span> Public Sector</div>
+        <div class="ticker-item"><span style="color:var(--accent-teal);">⬡</span> HubSpot CRM</div>
+        <div class="ticker-item"><span style="color:var(--accent-green);">⬡</span> Looker Studio</div>
+        <div class="ticker-item"><span style="color:var(--accent-blue);">⬡</span> n8n Automation</div>
+        <div class="ticker-item"><span style="color:var(--accent-cyan);">⬡</span> Apollo.io</div>
+        <!-- duplicate for seamless loop -->
+        <div class="ticker-item"><span style="color:var(--accent-blue);">⬡</span> Rise &amp; Scale</div>
+        <div class="ticker-item"><span style="color:var(--accent-cyan);">⬡</span> Cashwalk</div>
+        <div class="ticker-item"><span style="color:var(--accent-teal);">⬡</span> Internationalization</div>
+        <div class="ticker-item"><span style="color:var(--accent-green);">⬡</span> Fundraising Hub</div>
+        <div class="ticker-item"><span style="color:var(--accent-blue);">⬡</span> Corporate Mandates</div>
+        <div class="ticker-item"><span style="color:var(--accent-cyan);">⬡</span> Public Sector</div>
+        <div class="ticker-item"><span style="color:var(--accent-teal);">⬡</span> HubSpot CRM</div>
+        <div class="ticker-item"><span style="color:var(--accent-green);">⬡</span> Looker Studio</div>
+        <div class="ticker-item"><span style="color:var(--accent-blue);">⬡</span> n8n Automation</div>
+        <div class="ticker-item"><span style="color:var(--accent-cyan);">⬡</span> Apollo.io</div>
+      </div>
+    </div>
+    <!-- Before/after -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem;">
+      <div class="fade-in fade-in-delay-2">
+        <h3 style="font-family:'Syne',sans-serif;font-size:18px;margin-bottom:1rem;">Event Pipeline: Rise&amp;Scale</h3>
+        <div class="metric-compare">
+          <div class="metric-before">
+            <div class="metric-label">Before System</div>
+            <div class="metric-row"><span>Event conversion</span><span class="metric-val-before">~15%</span></div>
+            <div class="metric-row"><span>Lead follow-up time</span><span class="metric-val-before">3–5 days</span></div>
+            <div class="metric-row"><span>Contacts captured</span><span class="metric-val-before">~60%</span></div>
+            <div class="metric-row"><span>Pipeline visibility</span><span class="metric-val-before">Manual</span></div>
+          </div>
+          <div class="metric-after">
+            <div class="metric-label">After 90 Days</div>
+            <div class="metric-row"><span>Event conversion</span><span class="metric-val-after">≥40%</span></div>
+            <div class="metric-row"><span>Lead follow-up time</span><span class="metric-val-after">&lt;2 hrs</span></div>
+            <div class="metric-row"><span>Contacts captured</span><span class="metric-val-after">100%</span></div>
+            <div class="metric-row"><span>Pipeline visibility</span><span class="metric-val-after">Real-time</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-3">
+        <h3 style="font-family:'Syne',sans-serif;font-size:18px;margin-bottom:1rem;">Corporate BD: DACH Enterprise</h3>
+        <div class="metric-compare">
+          <div class="metric-before">
+            <div class="metric-label">Before System</div>
+            <div class="metric-row"><span>Avg deal cycle</span><span class="metric-val-before">4 months</span></div>
+            <div class="metric-row"><span>Manual ops/week</span><span class="metric-val-before">8–12 hrs</span></div>
+            <div class="metric-row"><span>Reporting time</span><span class="metric-val-before">3–5 days</span></div>
+            <div class="metric-row"><span>Attribution model</span><span class="metric-val-before">None</span></div>
+          </div>
+          <div class="metric-after">
+            <div class="metric-label">After 90 Days</div>
+            <div class="metric-row"><span>Avg deal cycle</span><span class="metric-val-after">~3.5 mo</span></div>
+            <div class="metric-row"><span>Manual ops/week</span><span class="metric-val-after">&lt;2 hrs</span></div>
+            <div class="metric-row"><span>Reporting time</span><span class="metric-val-after">Real-time</span></div>
+            <div class="metric-row"><span>Attribution model</span><span class="metric-val-after">Multi-touch</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in fade-in-delay-4" style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;">
+      <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Syne',sans-serif;font-weight:800;font-size:18px;">H</div>
+      <div>
+        <p style="font-size:16px;font-style:italic;color:var(--text-primary);line-height:1.7;margin-bottom:8px;">"By Day 90, you will have a system that runs. By Month 6, you will have data to optimize. Every decision in this framework was designed specifically for how Start2 works — not a generic template adapted for you."</p>
+        <p style="font-size:13px;color:var(--text-muted);">— Hiep Nguyen, Marketing Operations &amp; Analytics Manager</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 9 — ANALYTICS DASHBOARD ═══════ -->
+<section id="slide9">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <p class="section-label fade-in">Revenue Intelligence Layer</p>
+      <h2 class="section-title fade-in fade-in-delay-1" style="max-width:700px;margin:0 auto 1rem;">The <span class="gradient-text">Executive Dashboard</span> — See Everything, Decide Faster</h2>
+    </div>
+    <div class="browser-mock fade-in fade-in-delay-2">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot bd-red"></div>
+          <div class="browser-dot bd-yellow"></div>
+          <div class="browser-dot bd-green"></div>
+        </div>
+        <div class="browser-url">app.lookerstudio.google.com › start2-growth-engine-dashboard</div>
+      </div>
+      <div class="browser-body">
+        <div class="watermark">SAMPLE DATA</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+          <div style="background:var(--bg-primary);border-radius:12px;border:1px solid var(--border);padding:1rem;">
+            <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.75rem;">Pipeline Value Over Time (€K)</div>
+            <canvas id="lineChart" height="160"></canvas>
+          </div>
+          <div style="background:var(--bg-primary);border-radius:12px;border:1px solid var(--border);padding:1rem;">
+            <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.75rem;">Deals by Persona</div>
+            <canvas id="barChart" height="160"></canvas>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.75rem;">KPI Summary — Current Quarter</div>
+          <table class="kpi-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Current</th>
+                <th>Target</th>
+                <th>Status</th>
+                <th>Δ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Event → Pipeline Conversion</td>
+                <td style="color:#f87171;">15%</td>
+                <td>40%</td>
+                <td><span class="badge badge-orange" style="font-size:11px;padding:2px 8px;">In Progress</span></td>
+                <td style="color:var(--accent-green);">+12%</td>
+              </tr>
+              <tr>
+                <td>MQL Response Time</td>
+                <td style="color:#f87171;">3.2 days</td>
+                <td>&lt;2 hours</td>
+                <td><span class="badge" style="font-size:11px;padding:2px 8px;">Sprint 2</span></td>
+                <td style="color:var(--accent-green);">–18h</td>
+              </tr>
+              <tr>
+                <td>Corporate Pipeline Value</td>
+                <td style="color:var(--accent-cyan);">€420K</td>
+                <td>€600K</td>
+                <td><span class="badge badge-cyan" style="font-size:11px;padding:2px 8px;">On Track</span></td>
+                <td style="color:var(--accent-green);">+€85K</td>
+              </tr>
+              <tr>
+                <td>Nurture Email Open Rate</td>
+                <td style="color:#f87171;">18%</td>
+                <td>≥30%</td>
+                <td><span class="badge badge-orange" style="font-size:11px;padding:2px 8px;">Testing</span></td>
+                <td style="color:var(--accent-green);">+6%</td>
+              </tr>
+              <tr>
+                <td>Manual Ops Hours/Week</td>
+                <td style="color:#f87171;">10h</td>
+                <td>&lt;2h</td>
+                <td><span class="badge badge-green" style="font-size:11px;padding:2px 8px;">Automating</span></td>
+                <td style="color:var(--accent-green);">–4h/wk</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 10 — WHY HIEP ═══════ -->
+<section id="slide10">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+      <div>
+        <p class="section-label fade-in">The Person Behind the Plan</p>
+        <h2 class="section-title fade-in fade-in-delay-1">Why Hiep — <span class="gradient-text">Credibility &amp; Commitment</span></h2>
+        <p class="section-sub fade-in fade-in-delay-2" style="margin-bottom:2rem;">Not here to sell a platform. Here to build the engine, train the team, and hand over dashboards that run on their own.</p>
+        <div class="quote-block fade-in fade-in-delay-3">
+          "Every decision in this framework — the 3 pipelines, the separate scoring models for each persona, the government relationship tracking — was designed specifically for how Start2 works. This is not a generic template adapted for you. It was built from the ground up for you."
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div class="trust-card fade-in fade-in-delay-1">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="22" height="22" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <div class="badge" style="margin-bottom:8px;">Relevant Experience</div>
+              <h3 style="font-size:15px;font-weight:600;margin-bottom:6px;">HubSpot Architecture &amp; RevOps Builds</h3>
+              <p style="font-size:13px;color:var(--text-muted);">Proven track record in HubSpot architecture design, Revenue Operations builds, and multi-persona automation implementations in B2B environments.</p>
+            </div>
+          </div>
+        </div>
+        <div class="trust-card fade-in fade-in-delay-2">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(6,182,212,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="22" height="22" fill="none" stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <div>
+              <div class="badge badge-cyan" style="margin-bottom:8px;">Ecosystem Familiarity</div>
+              <h3 style="font-size:15px;font-weight:600;margin-bottom:6px;">B2B Multi-Persona, Startup/Corporate</h3>
+              <p style="font-size:13px;color:var(--text-muted);">Deep experience navigating complex B2B ecosystems with multiple buyer personas — exactly the environment Start2 operates in daily.</p>
+            </div>
+          </div>
+        </div>
+        <div class="trust-card fade-in fade-in-delay-3">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="22" height="22" fill="none" stroke="#22C55E" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <div class="badge badge-green" style="margin-bottom:8px;">Start2-Specific Prep</div>
+              <h3 style="font-size:15px;font-weight:600;margin-bottom:6px;">Built From the Ground Up for Start2</h3>
+              <p style="font-size:13px;color:var(--text-muted);">Significant time analyzing Start2's programs, website, and operations architecture. The 3-pipeline design, persona scoring models, and government tracking were all custom-designed for this specific ecosystem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 11 — INVESTMENT ═══════ -->
+<section id="slide11">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p class="section-label fade-in">Make the Decision Crystal Clear</p>
+      <h2 class="section-title fade-in fade-in-delay-1" style="max-width:700px;margin:0 auto 1rem;">What I'm Asking For — <span class="gradient-text">Investment &amp; Engagement</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+      <div class="fade-in fade-in-delay-1">
+        <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:1.25rem;">Tool Stack Investment</h3>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+          <table class="tool-table">
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Purpose</th>
+                <th>Est. Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>HubSpot Mktg + Sales Pro</strong></td>
+                <td style="color:var(--text-muted);">Core CRM &amp; automation</td>
+                <td style="color:var(--accent-cyan);">€800–1,500/mo</td>
+              </tr>
+              <tr>
+                <td><strong>n8n (self-hosted)</strong></td>
+                <td style="color:var(--text-muted);">Workflow automation</td>
+                <td style="color:var(--accent-cyan);">~€50/mo</td>
+              </tr>
+              <tr>
+                <td><strong>Apollo.io Starter</strong></td>
+                <td style="color:var(--text-muted);">Data enrichment</td>
+                <td style="color:var(--accent-cyan);">~$99/mo</td>
+              </tr>
+              <tr>
+                <td><strong>Claude API</strong></td>
+                <td style="color:var(--text-muted);">AI personalization</td>
+                <td style="color:var(--accent-cyan);">~$50–200/mo</td>
+              </tr>
+              <tr>
+                <td><strong>Looker Studio</strong></td>
+                <td style="color:var(--text-muted);">Dashboards &amp; reporting</td>
+                <td style="color:var(--accent-cyan);">~€100/mo</td>
+              </tr>
+              <tr>
+                <td><strong>GA4 + GTM Server</strong></td>
+                <td style="color:var(--text-muted);">GDPR-compliant tracking</td>
+                <td style="color:var(--accent-cyan);">~€30/mo</td>
+              </tr>
+              <tr style="background:rgba(6,182,212,0.05);">
+                <td style="font-weight:700;">Total Tool Stack</td>
+                <td></td>
+                <td style="color:var(--accent-green);font-weight:700;">~€1,500–2,500/mo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div class="invest-card fade-in fade-in-delay-2">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;">
+            <div>
+              <div class="badge badge-cyan" style="margin-bottom:8px;">Option B — Recommended Entry</div>
+              <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;">Phased Start</h3>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:12px;color:var(--text-muted);">Sprint 1 only</div>
+              <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent-cyan);">30 Days</div>
+            </div>
+          </div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:1.25rem;">
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-cyan);">→</span> Foundation infrastructure live</li>
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-cyan);">→</span> Prove the model on contained scope</li>
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-cyan);">→</span> Decide Sprints 2&amp;3 based on results</li>
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-cyan);">→</span> Tool cost: under €1,000/month</li>
+          </ul>
+        </div>
+        <div class="invest-card featured fade-in fade-in-delay-3">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;">
+            <div>
+              <div class="badge" style="margin-bottom:8px;">Option A — Full Engagement</div>
+              <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;">Complete Growth Engine</h3>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:12px;color:var(--text-muted);">Sprints 1–3</div>
+              <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent-blue);">90 Days</div>
+            </div>
+          </div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:1.25rem;">
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-blue);">→</span> Full Growth Engine v2.0 delivered</li>
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-blue);">→</span> Team trained, dashboards live</li>
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-blue);">→</span> Government report template approved</li>
+            <li style="font-size:14px;color:var(--text-muted);display:flex;gap:8px;"><span style="color:var(--accent-blue);">→</span> 6-month optimization retainer included</li>
+          </ul>
+          <div style="font-size:13px;color:var(--text-muted);padding:10px 14px;background:rgba(59,130,246,0.08);border-radius:8px;border:1px solid rgba(59,130,246,0.15);">
+            What Start2 needs from you: HubSpot admin access + 2–3 hours from a PM/BD rep in Week 1 + one decision-maker contact for scope questions. Everything else is on me.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 12 — THE ASK / CLOSING ═══════ -->
+<section id="slide12">
+  <div class="container">
+    <!-- Closing statement -->
+    <div style="text-align:center;margin-bottom:4rem;">
+      <p class="section-label fade-in">The One Thing to Remember</p>
+      <div style="max-width:800px;margin:0 auto;" class="fade-in fade-in-delay-1">
+        <h2 style="font-family:'Syne',sans-serif;font-size:clamp(24px,3.5vw,40px);font-weight:800;line-height:1.25;margin-bottom:1.5rem;">
+          Start2 already has the ecosystem,<br>the programs, and the reputation.
+        </h2>
+        <p style="font-size:clamp(18px,2.5vw,24px);color:var(--text-muted);line-height:1.6;margin-bottom:1rem;">
+          Growth Engine v2.0 gives you the infrastructure to scale all three —
+        </p>
+        <p style="font-size:clamp(18px,2.5vw,24px);font-weight:600;" class="gradient-text">
+          without losing a single lead, a single data point, or a single opportunity.
+        </p>
+      </div>
+    </div>
+    <!-- The ask -->
+    <div style="max-width:680px;margin:0 auto 4rem;text-align:center;" class="fade-in fade-in-delay-2">
+      <div style="background:var(--bg-card);border:1px solid rgba(59,130,246,0.3);border-radius:16px;padding:2rem;box-shadow:0 0 60px rgba(59,130,246,0.1);">
+        <p style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-cyan);margin-bottom:1rem;">The Question I'd Like to Leave You With</p>
+        <p style="font-family:'Syne',sans-serif;font-size:clamp(18px,2vw,24px);font-weight:700;line-height:1.4;">"What would it take for you to green-light Sprint 1?"</p>
+      </div>
+    </div>
+    <!-- Contact form -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+      <div class="fade-in fade-in-delay-2">
+        <h3 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:0.75rem;">Let's Build This Together</h3>
+        <p style="font-size:15px;color:var(--text-muted);margin-bottom:2rem;">Ready to move forward? Drop a message and I'll follow up within 24 hours.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);">
+            <svg width="18" height="18" fill="none" stroke="var(--accent-cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            hiep.nguyen@start2.group
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);">
+            <svg width="18" height="18" fill="none" stroke="var(--accent-cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Munich / DACH Region
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted);">
+            <svg width="18" height="18" fill="none" stroke="var(--accent-cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/hiepnguyen
+          </div>
+        </div>
+      </div>
+      <form action="#" class="contact-form fade-in fade-in-delay-3" style="display:flex;flex-direction:column;gap:1rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <input type="text" placeholder="Your Role at Start2">
+        <textarea rows="4" placeholder="Your message or questions..."></textarea>
+        <button type="submit" class="btn-primary" style="align-self:flex-start;border:none;cursor:pointer;">
+          Send Message
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5rem;">
+    <a href="#slide1" class="nav-logo" style="font-size:22px;">Start2 Growth Engine v2.0</a>
+    <p style="font-size:13px;color:var(--text-muted);max-width:500px;line-height:1.7;">
+      A proposal by <strong style="color:var(--text-primary)">Hiep Nguyen</strong> · Marketing Operations &amp; Analytics Manager<br>
+      Prepared for Start2 Group · February 2026
+    </p>
+    <div style="display:flex;gap:1.5rem;">
+      <a href="https://start2.group" target="_blank" style="font-size:13px;color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#06B6D4'" onmouseout="this.style.color='#8B9EC8'">start2.group</a>
+      <span style="color:var(--border);">|</span>
+      <a href="#" style="font-size:13px;color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#06B6D4'" onmouseout="this.style.color='#8B9EC8'">LinkedIn</a>
+      <span style="color:var(--border);">|</span>
+      <a href="#" style="font-size:13px;color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#06B6D4'" onmouseout="this.style.color='#8B9EC8'">Download PDF</a>
+    </div>
+    <p style="font-size:12px;color:rgba(139,158,200,0.4);">© 2026 Hiep Nguyen · Start2 Growth Engine v2.0 · Outline version 1.0</p>
+  </div>
+</footer>
+
+<script>
+// ────────────────────────────────────────────────────────────────
+// 1. SCROLL-SPY — update active nav tab via IntersectionObserver
+// ────────────────────────────────────────────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#navTabs a[data-slide], #mobile-menu a');
+
+const spyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { threshold: 0.4, rootMargin: '-56px 0px 0px 0px' });
+
+sections.forEach(s => spyObserver.observe(s));
+
+// ────────────────────────────────────────────────────────────────
+// 2. FADE-IN — trigger on scroll
+// ────────────────────────────────────────────────────────────────
+const fadeEls = document.querySelectorAll('.fade-in');
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-30px 0px 0px 0px' });
+
+fadeEls.forEach(el => fadeObserver.observe(el));
+
+// ────────────────────────────────────────────────────────────────
+// 3. COUNT-UP ANIMATION
+// ────────────────────────────────────────────────────────────────
+let countUpDone = false;
+function runCountUp() {
+  if (countUpDone) return;
+  countUpDone = true;
+  document.querySelectorAll('.count-up').forEach(el => {
+    const target = parseFloat(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const step = 16;
+    const steps = duration / step;
+    let current = 0;
+    const increment = target / steps;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      const display = Number.isInteger(target) ? Math.floor(current) : current.toFixed(1);
+      el.textContent = prefix + display + suffix;
+    }, step);
+  });
+}
+
+const heroSection = document.getElementById('slide1');
+const heroObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) runCountUp(); });
+}, { threshold: 0.3 });
+heroObs.observe(heroSection);
+// Also run on load since hero is visible first
+window.addEventListener('load', () => setTimeout(runCountUp, 400));
+
+// ────────────────────────────────────────────────────────────────
+// 4. CHART.JS — lazy init on slide9 enter
+// ────────────────────────────────────────────────────────────────
+let chartsInit = false;
+
+function initCharts() {
+  if (chartsInit) return;
+  chartsInit = true;
+
+  const chartDefaults = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#9CA3AF', font: { family: 'DM Sans', size: 11 }, boxWidth: 12 } } },
+    scales: {
+      x: { ticks: { color: '#6B7280', font: { size: 10, family: 'DM Sans' } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: '#6B7280', font: { size: 10, family: 'DM Sans' } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  };
+
+  // Line chart — pipeline value over time
+  const lineCtx = document.getElementById('lineChart').getContext('2d');
+  const lineGrad = lineCtx.createLinearGradient(0, 0, 0, 160);
+  lineGrad.addColorStop(0, 'rgba(59,130,246,0.35)');
+  lineGrad.addColorStop(1, 'rgba(59,130,246,0)');
+
+  new Chart(lineCtx, {
+    type: 'line',
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 4', 'Week 6', 'Week 8', 'Week 10', 'Week 12'],
+      datasets: [
+        {
+          label: 'Corporate Pipeline (€K)',
+          data: [120, 145, 195, 255, 310, 375, 420],
+          borderColor: '#3B82F6', backgroundColor: lineGrad,
+          fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#3B82F6', borderWidth: 2
+        },
+        {
+          label: 'Startup Pipeline (€K)',
+          data: [45, 62, 88, 105, 118, 130, 145],
+          borderColor: '#06B6D4', backgroundColor: 'transparent',
+          fill: false, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#06B6D4', borderWidth: 2
+        }
+      ]
+    },
+    options: { ...chartDefaults, interaction: { intersect: false, mode: 'index' } }
+  });
+
+  // Bar chart — deals by persona
+  const barCtx = document.getElementById('barChart').getContext('2d');
+  new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Startups', 'Corporates', 'Government'],
+      datasets: [
+        {
+          label: 'Q3 Target',
+          data: [24, 8, 2],
+          backgroundColor: 'rgba(59,130,246,0.2)', borderColor: '#3B82F6', borderWidth: 1.5,
+          borderRadius: 4
+        },
+        {
+          label: 'Q3 Actual',
+          data: [18, 5, 1],
+          backgroundColor: 'rgba(6,182,212,0.2)', borderColor: '#06B6D4', borderWidth: 1.5,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: chartDefaults
+  });
+}
+
+const slide9El = document.getElementById('slide9');
+const chartObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) initCharts(); });
+}, { threshold: 0.2 });
+chartObserver.observe(slide9El);
+
+// ────────────────────────────────────────────────────────────────
+// 5. LAYER ACCORDION — slide 5
+// ────────────────────────────────────────────────────────────────
+function toggleLayer(id) {
+  const layers = ['layer1', 'layer2', 'layer3', 'layer4', 'layer5'];
+  layers.forEach(lId => {
+    const el = document.getElementById(lId);
+    if (lId === id) {
+      el.classList.toggle('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+}
+
+// ────────────────────────────────────────────────────────────────
+// 6. MOBILE NAV
+// ────────────────────────────────────────────────────────────────
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+// Close mobile menu on outside click
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById('hamburger');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+
+// ────────────────────────────────────────────────────────────────
+// 7. RESPONSIVE — handle grid on mobile
+// ────────────────────────────────────────────────────────────────
+function handleResponsive() {
+  const isMobile = window.innerWidth < 768;
+  document.querySelectorAll('.responsive-split').forEach(el => {
+    el.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
+  });
+}
+handleResponsive();
+window.addEventListener('resize', handleResponsive);
+</script>
+</body>
+</html>
