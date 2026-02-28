@@ -35,14 +35,10 @@
     backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: 24px;
+    height: 100%;
   }
   .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.7s ease-out; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
-  .gradient-text {
-    background: linear-gradient(135deg, #F0F4FF 0%, #8B9EC8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
 </style>
 </head>
 <body>
@@ -51,7 +47,7 @@
   <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
     <div class="flex items-center gap-2">
       <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center font-bold text-white">H</div>
-      <span class="font-sy=ne font-bold tracking-tight text-xl">HIEP NGUYEN</span>
+      <span class="font-syne font-bold tracking-tight text-xl">HIEP NGUYEN</span>
     </div>
     <div class="hidden md:flex gap-8 text-sm font-medium text-[#8B9EC8]">
       <a href="index.html" class="hover:text-cyan-400 transition-colors">Overview</a>
@@ -63,68 +59,70 @@
 </nav>
 
 <main class="pt-32 pb-20 px-6">
-  <div class="max-w-5xl mx-auto">
+  <div class="max-w-6xl mx-auto">
     
-    <div class="mb-16 fade-in">
+    <div class="mb-12 fade-in">
       <h1 class="font-syne text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
         Why trust <span class="text-cyan-400">the Engine</span><br>to my hands?
       </h1>
       <p class="text-xl text-muted max-w-2xl leading-relaxed">
-        I combine the structural discipline of an Engineer with over 10 years of hands-on execution in Marketing Technology.
+        A 20-year evolution from Engineering logic to AI-driven Revenue Operations.
       </p>
     </div>
 
-    <div class="glass-card p-8 mb-16 border-l-4 border-l-cyan-500 fade-in">
-      <p class="text-2xl font-syne italic text-cyan-100 leading-snug mb-4">
-        "I build systems that serve people, not the other way around. My goal is to empower Start2 with a self-running engine so you can focus on what matters: Scaling Growth."
-      </p>
-      <div class="flex items-center gap-3">
-        <div class="h-px w-8 bg-cyan-500"></div>
-        <span class="text-sm font-bold tracking-widest text-cyan-500 uppercase">Personal Mission</span>
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8 mb-20">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
       
-      <div class="glass-card p-6 flex flex-col h-full fade-in" style="transition-delay: 100ms;">
-        <div class="text-cyan-500 font-bold mb-4">2005 — 2010</div>
-        <h3 class="font-syne text-xl font-bold mb-3">The Engineering Foundation</h3>
-        <p class="text-muted text-sm leading-relaxed mb-6">
-          Graduated in <strong>Material Engineering</strong>. These 4 years ingrained in me the "First Principles" thinking: How to build robust foundations and ensure structural integrity in any system.
+      <div class="glass-card p-6 fade-in" style="transition-delay: 100ms;">
+        <div class="text-cyan-500 font-bold mb-2">2005 — 2009</div>
+        <h3 class="font-syne text-lg font-bold mb-3 uppercase tracking-tight">The Engineering Foundation</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          Graduated in <strong>Material Engineering</strong>. Mastered "First Principles" thinking: how to build robust foundations and ensure structural integrity in any system, physical or digital.
         </p>
-        <div class="mt-auto pt-4 border-t border-[#1a2540] text-xs font-mono text-cyan-400/60 uppercase tracking-tighter">
-          Mental Model: Logic & Precision
-        </div>
       </div>
 
-      <div class="glass-card p-6 flex flex-col h-full fade-in" style="transition-delay: 200ms; border-top: 2px solid var(--accent-cyan);">
-        <div class="text-cyan-500 font-bold mb-4">The Strategic Shift</div>
-        <h3 class="font-syne text-xl font-bold mb-3">Market Execution > Theory</h3>
-        <p class="text-muted text-sm leading-relaxed mb-6">
-          Recognized that <strong>MarTech</strong> was evolving faster than academic IT curriculums. I chose immediate market immersion, mastering digital systems and automation through real-world business challenges.
+      <div class="glass-card p-6 fade-in" style="transition-delay: 200ms; border-top: 2px solid var(--accent-cyan);">
+        <div class="text-cyan-500 font-bold mb-2">2009 — 2010</div>
+        <h3 class="font-syne text-lg font-bold mb-3 uppercase tracking-tight">The Data Shift</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          Pursued a second degree in <strong>IT Engineering</strong> at night while working by day. Realized that market-speed execution far outpaced academic theory—choosing real-world tech mastery over the classroom.
         </p>
-        <div class="mt-auto pt-4 border-t border-[#1a2540] text-xs font-mono text-cyan-400 uppercase tracking-tighter">
-          Focus: Modern Data Architecture
-        </div>
       </div>
 
-      <div class="glass-card p-6 flex flex-col h-full fade-in" style="transition-delay: 300ms;">
-        <div class="text-cyan-500 font-bold mb-4">Present Day</div>
-        <h3 class="font-syne text-xl font-bold mb-3">The Practical Expert</h3>
-        <p class="text-muted text-sm leading-relaxed mb-6">
-          10+ years of bridging the gap between <strong>Operations & Technology</strong>. I don't just use tools; I architect growth ecosystems that run seamlessly, from HubSpot to AI-driven automation.
+      <div class="glass-card p-6 fade-in" style="transition-delay: 300ms;">
+        <div class="text-cyan-500 font-bold mb-2">2010 — 2014</div>
+        <h3 class="font-syne text-lg font-bold mb-3 uppercase tracking-tight">Digital & MarTech Mastery</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          Mastered the foundations of <strong>Digital Marketing & MarTech execution</strong>. Deep-dived into business strategy and self-learning to bridge the gap between technical tools and marketing ROI.
         </p>
-        <div class="mt-auto pt-4 border-t border-[#1a2540] text-xs font-mono text-cyan-400/60 uppercase tracking-tighter">
-          Value: Sustainable Scaling
-        </div>
+      </div>
+
+      <div class="glass-card p-6 fade-in" style="transition-delay: 400ms;">
+        <div class="text-cyan-500 font-bold mb-2">2015 — 2020</div>
+        <h3 class="font-syne text-lg font-bold mb-3 uppercase tracking-tight">MarTech Operations</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          Elevated to <strong>MarTech Operations</strong>. Began building the early versions of Layer 5 (Data Reporting), turning fragmented data into actionable executive insights.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 fade-in" style="transition-delay: 500ms; border-bottom: 2px solid var(--accent-teal);">
+        <div class="text-cyan-500 font-bold mb-2">2020 — 2025</div>
+        <h3 class="font-syne text-lg font-bold mb-3 uppercase tracking-tight">AI & Automation Engine</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          Integrating <strong>AI & Hyper-Automation</strong>. Finalizing Layer 5 of the Growth Engine to create a fully autonomous, data-intelligent ecosystem for Start2 Group.
+        </p>
+      </div>
+
+      <div class="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-[24px] p-6 flex flex-col justify-center items-center text-center fade-in" style="transition-delay: 600ms;">
+        <div class="text-4xl mb-4">🚀</div>
+        <h3 class="font-syne text-xl font-bold mb-2">Ready to Scale</h3>
+        <p class="text-muted text-xs">20 years of logic and tech combined into one Growth Architect.</p>
       </div>
 
     </div>
 
     <div class="text-center fade-in">
-      <h2 class="font-syne text-3xl font-bold mb-4 italic">"An engineer builds for reliability. A marketer builds for growth. I do both."</h2>
-      <a href="Framework.html" class="inline-block mt-8 px-10 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all transform hover:scale-105">
-        Explore the 5-Layer Engine →
+      <a href="Framework.html" class="inline-block px-10 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg shadow-cyan-500/20">
+        Review the 5-Layer Engine →
       </a>
     </div>
 
@@ -132,13 +130,8 @@
 </main>
 
 <footer class="border-t border-[#1a2540] py-12 px-6 bg-[#03070d]">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
     <div class="font-syne font-bold text-lg text-muted">HIEP NGUYEN</div>
-    <div class="flex gap-8 text-sm font-medium text-[#8B9EC8]">
-      <a href="#" class="hover:text-cyan-400">LinkedIn</a>
-      <a href="#" class="hover:text-cyan-400">Portfolio</a>
-      <a href="#" class="hover:text-cyan-400 text-cyan-400">Download CV</a>
-    </div>
     <p class="text-xs text-[#8B9EC8]/40">© 2026 Start2 Growth Engine v2.0</p>
   </div>
 </footer>
